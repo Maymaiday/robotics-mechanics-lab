@@ -323,9 +323,8 @@ def run_R_ablation(R_values=[0.1, 1.0, 10.0], sim_time=30.0):
             make_animation=False
         )
         
-        # 正确计算角度误差（考虑圆周性）
+        # 计算角度误差
         theta1 = x[0, :]
-        # 方法：到 pi 的最短弧长
         angle_error = np.abs(np.arctan2(np.sin(theta1 - np.pi), np.cos(theta1 - np.pi)))
         final_error = angle_error[-1]
         
@@ -339,7 +338,6 @@ def run_R_ablation(R_values=[0.1, 1.0, 10.0], sim_time=30.0):
             "rms_u (N·m)": rms_u
         })
         
-        # 可选：打印最终实际角度（方便检查）
         print(f"   Final theta1 = {x[0, -1]:.3f} rad (norm error = {final_error:.4f})")
     
     df = pd.DataFrame(results)
